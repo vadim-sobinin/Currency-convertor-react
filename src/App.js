@@ -3,7 +3,6 @@ import { Block } from './Block';
 import './index.scss';
 
 function App() {
-
   const [fromCurrency, setFromCurrency] = React.useState('RUB');
   const [toCurrency, setToCurrency] = React.useState('USD');
   const [fromPrice, setFromPrice] = React.useState(0);
@@ -12,7 +11,7 @@ function App() {
   const ratesRef = React.useRef({});
 
   React.useEffect(() => {
-    fetch('https://cdn.cur.su/api/latest.json')
+    fetch('https://openexchangerates.org/api/latest.json?app_id=9be52f0fb6f64be383da95ed00c4faa4')
       .then((res) => res.json())
       .then((json) => {
         ratesRef.current = json.rates;
@@ -47,13 +46,13 @@ function App() {
 
   return (
     <div className="App">
-      <Block 
+      <Block
         value={fromPrice}
         currency={fromCurrency}
         onChangeCurrency={setFromCurrency}
-        onChangeValue={onChangeFromPrice} 
+        onChangeValue={onChangeFromPrice}
       />
-      <Block 
+      <Block
         value={toPrice}
         currency={toCurrency}
         onChangeCurrency={setToCurrency}
